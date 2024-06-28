@@ -1,0 +1,1354 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenApi Specification Files Keeper - Hasan",
+    "description": "OpenAPI Documentation For Files Keeper",
+    "contact": {
+      "url": "https://www.hasan.com",
+      "email": "hasanalmunawar9@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/validate/password-code": {
+      "put": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "validatePasswordCode",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/update/password": {
+      "put": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "updatePassword",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/file/upload": {
+      "post": {
+        "tags": [
+          "file-controller"
+        ],
+        "operationId": "upload",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/send-update/password": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "requestUpdatePassword",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedirectView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedirectView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/forgot-password": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedirectView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/activate-account": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "activateAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/api/v1/file": {
+      "get": {
+        "tags": [
+          "file-controller"
+        ],
+        "operationId": "getAllFiles",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageFileResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/file/download/{fileId}": {
+      "get": {
+        "tags": [
+          "file-controller"
+        ],
+        "operationId": "downloadFile",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CodeRequest": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          },
+          "passwordConfirm": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicationContext": {
+        "type": "object",
+        "properties": {
+          "parent": {
+            "$ref": "#/components/schemas/ApplicationContext"
+          },
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "applicationName": {
+            "type": "string"
+          },
+          "startupDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "autowireCapableBeanFactory": {
+            "$ref": "#/components/schemas/AutowireCapableBeanFactory"
+          },
+          "environment": {
+            "$ref": "#/components/schemas/Environment"
+          },
+          "beanDefinitionCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "beanDefinitionNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parentBeanFactory": {
+            "$ref": "#/components/schemas/BeanFactory"
+          },
+          "classLoader": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "registeredAsParallelCapable": {
+                "type": "boolean"
+              },
+              "parent": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "registeredAsParallelCapable": {
+                    "type": "boolean"
+                  },
+                  "unnamedModule": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "classLoader": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "registeredAsParallelCapable": {
+                            "type": "boolean"
+                          },
+                          "definedPackages": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "annotations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                },
+                                "declaredAnnotations": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                },
+                                "sealed": {
+                                  "type": "boolean"
+                                },
+                                "specificationTitle": {
+                                  "type": "string"
+                                },
+                                "specificationVersion": {
+                                  "type": "string"
+                                },
+                                "specificationVendor": {
+                                  "type": "string"
+                                },
+                                "implementationTitle": {
+                                  "type": "string"
+                                },
+                                "implementationVersion": {
+                                  "type": "string"
+                                },
+                                "implementationVendor": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "defaultAssertionStatus": {
+                            "type": "boolean",
+                            "writeOnly": true
+                          }
+                        }
+                      },
+                      "descriptor": {
+                        "type": "object",
+                        "properties": {
+                          "open": {
+                            "type": "boolean"
+                          },
+                          "automatic": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "named": {
+                        "type": "boolean"
+                      },
+                      "annotations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "declaredAnnotations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "packages": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "layer": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "definedPackages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "annotations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "declaredAnnotations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "sealed": {
+                          "type": "boolean"
+                        },
+                        "specificationTitle": {
+                          "type": "string"
+                        },
+                        "specificationVersion": {
+                          "type": "string"
+                        },
+                        "specificationVendor": {
+                          "type": "string"
+                        },
+                        "implementationTitle": {
+                          "type": "string"
+                        },
+                        "implementationVersion": {
+                          "type": "string"
+                        },
+                        "implementationVendor": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "defaultAssertionStatus": {
+                    "type": "boolean",
+                    "writeOnly": true
+                  }
+                }
+              },
+              "unnamedModule": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "classLoader": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "registeredAsParallelCapable": {
+                        "type": "boolean"
+                      },
+                      "definedPackages": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "annotations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              }
+                            },
+                            "declaredAnnotations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              }
+                            },
+                            "sealed": {
+                              "type": "boolean"
+                            },
+                            "specificationTitle": {
+                              "type": "string"
+                            },
+                            "specificationVersion": {
+                              "type": "string"
+                            },
+                            "specificationVendor": {
+                              "type": "string"
+                            },
+                            "implementationTitle": {
+                              "type": "string"
+                            },
+                            "implementationVersion": {
+                              "type": "string"
+                            },
+                            "implementationVendor": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "defaultAssertionStatus": {
+                        "type": "boolean",
+                        "writeOnly": true
+                      }
+                    }
+                  },
+                  "descriptor": {
+                    "type": "object",
+                    "properties": {
+                      "open": {
+                        "type": "boolean"
+                      },
+                      "automatic": {
+                        "type": "boolean"
+                      }
+                    }
+                  },
+                  "named": {
+                    "type": "boolean"
+                  },
+                  "annotations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "declaredAnnotations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  },
+                  "packages": {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "layer": {
+                    "type": "object"
+                  }
+                }
+              },
+              "definedPackages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "annotations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "declaredAnnotations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "sealed": {
+                      "type": "boolean"
+                    },
+                    "specificationTitle": {
+                      "type": "string"
+                    },
+                    "specificationVersion": {
+                      "type": "string"
+                    },
+                    "specificationVendor": {
+                      "type": "string"
+                    },
+                    "implementationTitle": {
+                      "type": "string"
+                    },
+                    "implementationVersion": {
+                      "type": "string"
+                    },
+                    "implementationVendor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "defaultAssertionStatus": {
+                "type": "boolean",
+                "writeOnly": true
+              }
+            }
+          }
+        }
+      },
+      "AutowireCapableBeanFactory": {
+        "type": "object"
+      },
+      "BeanFactory": {
+        "type": "object"
+      },
+      "Environment": {
+        "type": "object",
+        "properties": {
+          "activeProfiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "defaultProfiles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "FilterRegistration": {
+        "type": "object",
+        "properties": {
+          "servletNameMappings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "urlPatternMappings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "initParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "className": {
+            "type": "string"
+          }
+        }
+      },
+      "HttpStatusCode": {
+        "type": "object",
+        "properties": {
+          "is4xxClientError": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "boolean"
+          },
+          "is5xxServerError": {
+            "type": "boolean"
+          },
+          "is1xxInformational": {
+            "type": "boolean"
+          },
+          "is2xxSuccessful": {
+            "type": "boolean"
+          },
+          "is3xxRedirection": {
+            "type": "boolean"
+          }
+        }
+      },
+      "JspConfigDescriptor": {
+        "type": "object",
+        "properties": {
+          "taglibs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaglibDescriptor"
+            }
+          },
+          "jspPropertyGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JspPropertyGroupDescriptor"
+            }
+          }
+        }
+      },
+      "JspPropertyGroupDescriptor": {
+        "type": "object",
+        "properties": {
+          "elIgnored": {
+            "type": "string"
+          },
+          "errorOnELNotFound": {
+            "type": "string"
+          },
+          "pageEncoding": {
+            "type": "string"
+          },
+          "scriptingInvalid": {
+            "type": "string"
+          },
+          "isXml": {
+            "type": "string"
+          },
+          "includePreludes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "includeCodas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "deferredSyntaxAllowedAsLiteral": {
+            "type": "string"
+          },
+          "trimDirectiveWhitespaces": {
+            "type": "string"
+          },
+          "errorOnUndeclaredNamespace": {
+            "type": "string"
+          },
+          "defaultContentType": {
+            "type": "string"
+          },
+          "buffer": {
+            "type": "string"
+          },
+          "urlPatterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "RedirectView": {
+        "type": "object",
+        "properties": {
+          "applicationContext": {
+            "$ref": "#/components/schemas/ApplicationContext"
+          },
+          "servletContext": {
+            "$ref": "#/components/schemas/ServletContext"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "requestContextAttribute": {
+            "type": "string"
+          },
+          "staticAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "exposePathVariables": {
+            "type": "boolean"
+          },
+          "exposeContextBeansAsAttributes": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "exposedContextBeanNames": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "beanName": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "contextRelative": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "http10Compatible": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "exposeModelAttributes": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "encodingScheme": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "statusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          },
+          "expandUriTemplateVariables": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "propagateQueryParams": {
+            "type": "boolean",
+            "writeOnly": true
+          },
+          "hosts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "propagateQueryProperties": {
+            "type": "boolean"
+          },
+          "redirectView": {
+            "type": "boolean"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "writeOnly": true
+          },
+          "attributesCSV": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "attributesMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ServletContext": {
+        "type": "object",
+        "properties": {
+          "sessionCookieConfig": {
+            "$ref": "#/components/schemas/SessionCookieConfig"
+          },
+          "virtualServerName": {
+            "type": "string"
+          },
+          "classLoader": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "registeredAsParallelCapable": {
+                "type": "boolean"
+              },
+              "definedPackages": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "annotations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "declaredAnnotations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "sealed": {
+                      "type": "boolean"
+                    },
+                    "specificationTitle": {
+                      "type": "string"
+                    },
+                    "specificationVersion": {
+                      "type": "string"
+                    },
+                    "specificationVendor": {
+                      "type": "string"
+                    },
+                    "implementationTitle": {
+                      "type": "string"
+                    },
+                    "implementationVersion": {
+                      "type": "string"
+                    },
+                    "implementationVendor": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "defaultAssertionStatus": {
+                "type": "boolean",
+                "writeOnly": true
+              }
+            }
+          },
+          "majorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "attributeNames": {
+            "type": "object"
+          },
+          "contextPath": {
+            "type": "string"
+          },
+          "initParameterNames": {
+            "type": "object"
+          },
+          "sessionTrackingModes": {
+            "uniqueItems": true,
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "COOKIE",
+                "URL",
+                "SSL"
+              ]
+            }
+          },
+          "sessionTimeout": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "servletRegistrations": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ServletRegistration"
+            }
+          },
+          "filterRegistrations": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FilterRegistration"
+            }
+          },
+          "defaultSessionTrackingModes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COOKIE",
+                "URL",
+                "SSL"
+              ]
+            }
+          },
+          "effectiveSessionTrackingModes": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COOKIE",
+                "URL",
+                "SSL"
+              ]
+            }
+          },
+          "jspConfigDescriptor": {
+            "$ref": "#/components/schemas/JspConfigDescriptor"
+          },
+          "requestCharacterEncoding": {
+            "type": "string"
+          },
+          "responseCharacterEncoding": {
+            "type": "string"
+          },
+          "servletContextName": {
+            "type": "string"
+          },
+          "effectiveMajorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "effectiveMinorVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serverInfo": {
+            "type": "string"
+          }
+        }
+      },
+      "ServletRegistration": {
+        "type": "object",
+        "properties": {
+          "runAsRole": {
+            "type": "string"
+          },
+          "mappings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "initParameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "className": {
+            "type": "string"
+          }
+        }
+      },
+      "SessionCookieConfig": {
+        "type": "object",
+        "properties": {
+          "httpOnly": {
+            "type": "boolean"
+          },
+          "path": {
+            "type": "string"
+          },
+          "secure": {
+            "type": "boolean"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "comment": {
+            "type": "string",
+            "deprecated": true
+          },
+          "maxAge": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "TaglibDescriptor": {
+        "type": "object",
+        "properties": {
+          "taglibURI": {
+            "type": "string"
+          },
+          "taglibLocation": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterRequest": {
+        "required": [
+          "email",
+          "first_name",
+          "password",
+          "phone"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 2147483647,
+            "minLength": 8,
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequest": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "access_token_expiry": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "FileResponse": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "PageFileResponse": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileResponse"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortObject"
+            }
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortObject"
+            }
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paged": {
+            "type": "boolean"
+          },
+          "unpaged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string"
+          },
+          "nullHandling": {
+            "type": "string"
+          },
+          "ascending": {
+            "type": "boolean"
+          },
+          "property": {
+            "type": "string"
+          },
+          "ignoreCase": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
