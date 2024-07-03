@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+:root
+{
+    --color1: #00f;
+    --formControlPadding: 0 26px;
+}
+
+body
+{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*background-color: var(--color1);*/
+    background: #4070f4;
+}
+
+
+.container{
+    max-width: 340px;
+    width: 100%;
+    height: 330px;
+    border-radius: 20px;
+    background-color: #fff;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.container .form{
+    width: 100%;
+}
+
+.form.login-form
+{
+    position: absolute;
+    right: 0;
+    margin-right: 0;
+    transition: all 0.2s ease;
+
+}
+
+.form.register-form{
+    position: absolute;
+    margin-left: 100%;
+    transition: all 0.2s ease;
+}
+
+.form .title{
+    display: block;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form .form-control
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    padding: 0 26px;
+}
+
+.form-control label
+{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.form-control input
+{
+    border: 2px solid #D1D1D1;
+    outline: none;
+    border-radius: 3px;
+    width: 100%;
+    height: 25px;
+    padding: 0 7px;
+    position: relative;
+}
+
+
+.form-control input:is(:valid, :focus)
+{
+    border-color: var(--color1);
+}
+
+.form-control .password-container
+{
+    position: relative;
+
+}
+
+.password-container input
+{
+    padding-right: 23px;
+}
+
+.password-container .icon
+{
+    width: 20px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 4px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+.form-control .error-text
+{
+    color: #f00;
+    height: 10px;
+}
+
+.form .button-container
+{
+    width: 100%;
+    padding: 0 26px;
+    margin-top: 28px;
+}
+
+.button-container .submit-button
+{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: var(--color1);
+    border-radius: 30px;
+    box-shadow: 0 3px 5px #B9B9B9;
+}
+
+.button-container .submit-button:hover
+{
+    box-shadow: inset 0 5px 5px #0202C3;
+    color: #D1D1D1;
+    padding-top: 3px;
+}
+
+.form .link-control
+{
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.link-control a.links
+{
+    color: var(--color1);
+    text-decoration: none;
+}
+
+.link-control a.links:hover
+{
+    text-decoration: underline;
+}
+
+.input-error-style
+{
+    border: 2px solid #f00 !important;
+}

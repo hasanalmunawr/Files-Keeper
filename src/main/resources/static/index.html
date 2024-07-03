@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Register</title>
+    <link rel="stylesheet" href="style/loginAndRegister.css">
+</head>
+<body>
+<div class="container" id="container">
+
+    <!-- LOGIN FORM -->
+    <div class="form login-form" id="login-form">
+        <div class="header">
+            <span class="title">Login</span>
+        </div>
+
+        <form action="#">
+            <!-- EMAIL -->
+            <div class="form-control">
+                <label for="email-input">E-mail</label>
+                <input type="text" name="email" id="login-email-input" required>
+                <small class="error-text"></small>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-control">
+                <label for="password-input">Password</label>
+
+                <div class="password-container">
+                    <input type="password" name="password" id="login-password-input" required>
+                    <img src="images/eye-slash.svg" class="icon eye-slash">
+                </div>
+
+                <small class="error-text"></small>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <div class="button-container">
+                <input type="button" value="Submit" class="submit-button" id="login-button" onclick="login()">
+            </div>
+
+            <!-- SIGNUP LINK -->
+            <div class="link-control">
+                <span>You don't have a count?</span>
+                <a href="#" class="links" id="signup-link">Sign-up now</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div class="form register-form" id="register-form">
+        <div class="header">
+            <span class="title">Register</span>
+        </div>
+
+        <form action="#">
+
+<!--            FIRST NAME-->
+            <div class="form-control">
+                <label for="name-input">Username</label>
+                <input type="text" name="name" id="register-name-input" required>
+                <small class="error-text"></small>
+            </div>
+
+<!--&lt;!&ndash;            LAST NAME&ndash;&gt;-->
+<!--            <div class="form-control">-->
+<!--                <label for="name-input">Last Name</label>-->
+<!--                <input type="text" name="name" id="register-name-input" required>-->
+<!--                <small class="error-text"></small>-->
+<!--            </div>-->
+
+            <!-- EMAIL -->
+            <div class="form-control">
+                <label for="email-input">E-mail</label>
+                <input type="text" name="email" id="register-email-input" required>
+                <small class="error-text"></small>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="form-control">
+                <label for="password-input">Password</label>
+
+                <div class="password-container">
+                    <input type="password" name="password" id="register-password-input" required>
+                    <img src="images/eye.svg" class="icon eye-slash">
+                </div>
+
+                <small class="error-text"></small>
+            </div>
+            <!-- COMFIRM PASSWORD -->
+            <div class="form-control">
+                <label for="comfirm-password-input">Comfirm your password</label>
+
+                <div class="password-container">
+                    <input type="password" id="register-comfirm-password-input" required>
+                    <img src="images/eye-slash.svg" class="icon eye-slash">
+                </div>
+
+                <small class="error-text"></small>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <div class="button-container">
+                <input type="button" value="Create" class="submit-button" id="register-button">
+            </div>
+
+            <!-- SIGNUP LINK -->
+            <div class="link-control">
+                <span>You don't have a count?</span>
+                <a href="#" class="links" id="signin-link">Sign-in now</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="scripts-js/switchSigninAndSignup.js"></script>
+<script src="scripts-js/showHidePassword.js"></script>
+<script src="scripts-js/validationFuncs.js"></script>
+<script src="scripts-js/loginValidation.js"></script>
+<script src="scripts-js/registerValidation.js"></script>
+
+</body>
+</html>

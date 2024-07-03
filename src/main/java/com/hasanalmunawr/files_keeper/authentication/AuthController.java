@@ -1,4 +1,4 @@
-package com.hasanalmunawr.files_keeper.controller;
+package com.hasanalmunawr.files_keeper.authentication;
 
 import com.hasanalmunawr.files_keeper.dto.CodeRequest;
 import com.hasanalmunawr.files_keeper.dto.LoginRequest;
