@@ -1,26 +1,32 @@
-
-
 services:
   postgres:
-    image: "postgres"
-    container_name: files_keeper
+    container_name: postgres-files-keeper
+    image: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secretKeyPostgres
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
       PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: files_keeper
+      POSTGRES_DB: files-keeper
     volumes:
-      - postgres:/data/postgres
+      - postgres: data/postgres
     ports:
-      - 5433:5432
+      - 5432:5432
     networks:
-      - files-keeper-network
+      - files-keeper
     restart: unless-stopped
 
-networks:
-  files-keeper-network:
-      driver: bridge
+#  mail-dev:
+#    container_name: mail-dev
+#    image: maildev/maildev
+#    ports:
+#      - 1080:1080
+#      - 1025:1025
+
 
 volumes:
   postgres:
     driver: local
+
+networks:
+  files-keeper:
+    driver: bridge
